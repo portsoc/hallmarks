@@ -1,65 +1,31 @@
 * {
-  transition: all 1s ease-in-out;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  transition: all 1s ease-in-out;
 }
 
 body {
-	font-family: 'Helvetica Neue', 'sans serif';
+  font-size: 150%;
+  font-family: 'Helvetica Neue', 'sans serif';
 }
 
-ul {
-  font-size: 2.2vmin;
-	line-height: 3vmin;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-template-rows: auto 1fr 1fr 1fr;
-	width: 100vw;
-	height: 100vh;
-  filter: brightness(0%);
-  grid-template-areas:
-    " i i h h "
-    " . . . . "
-    " . . . . "
-    " . . . p ";
+img {
+  height: 4em;
+  width: auto;
 }
-
-@media screen and (max-width: 800px) {
-  ul {
-    font-size: 1rem;
-      grid-template-areas:
-        " h "
-        " i "
-        " . "
-        " . "
-        " . "
-        " . "
-        " . "
-        " . "
-        " . "
-        " . "
-        " . "
-        " . "
-        " . "
-        " p ";
-        grid-template-columns: 1fr;
-      	grid-template-rows: repeat(10, auto);
-        width: 100vw;
-      	min-height: 100vh;
-        height: auto;
-        line-height: inherit;
-  }
-  img {
-    height: 4em;
-    width: auto;
-  }
-}
-
 
 li {
-	list-style: none;
-	color: #fff;
-	padding: 5vmin;
+  list-style: none;
+  color: #fff;
+  padding: 5vmin;
+}
+
+li:nth-child(even) {
+  background-color: #621360;
+}
+
+li:nth-child(odd) {
+  background-color: #00a0ff;
 }
 
 #intro {
@@ -72,25 +38,55 @@ li {
 
 #hallmark {
   grid-area: h;
-  color: rgba(255,255,255,0.75)
+  color: rgba(255, 255, 255, 0.75)
 }
 
-
-#hallmark,
-#port,
-#intro {
+#hallmark, #port, #intro {
   background: #621360;
-  font-size: 150%;
 }
 
-li:nth-child(even) {
-  background-color: #621360;
+/* Default UL for low res */
+ul {
+  display: grid;
+  filter: brightness(0%);
+  grid-template-areas: " h " " i " " . " " . " " . " " . " " . " " . " " . " " . " " . " " . " " . " " p ";
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(10, auto);
+  height: auto;
+  line-height: inherit;
+  min-height: 100vh;
+  width: 100vw;
 }
 
-li:nth-child(odd) {
-  background-color: #00a0ff;
+/* Wider screens go to 2 columns */
+@media (min-width: 700px) {
+  img {
+    width: 100%;
+  }
+  ul {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr 1fr;
+    grid-template-areas: " p h " " i . " " . . " " . . " " . . " " . . " " . . ";
+  }
 }
 
-img {
-	width: 100%;
+@media (min-width: 700px) and (max-width:1024px) {
+  li:nth-child(4n-1) {
+    background-color: #621360;
+  }
+
+  li:nth-child(4n-2) {
+    background-color: #00a0ff;
+  }
+}
+
+/* Beyond 1024 there's room for a 4 column grid */
+@media (min-width: 1024px) {
+  ul {
+    font-size: 2.2vmin;
+    line-height: 3vmin;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr 1fr;
+    grid-template-areas: " i i h h " " . . . . " " . . . . " " . . . p ";
+  }
 }
