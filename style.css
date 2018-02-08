@@ -1,12 +1,13 @@
 * {
   margin: 0;
   padding: 0;
-  transition: all 1s ease-in-out;
+  transition: filter 2s ease-in-out;
 }
 
 body {
   font-size: 150%;
   font-family: 'Helvetica Neue', 'sans serif';
+  box-sizing: border-box;
 }
 
 img {
@@ -18,6 +19,7 @@ li {
   list-style: none;
   color: #fff;
   padding: 5vmin;
+  border: 0.25em solid transparent;
 }
 
 li:nth-child(even) {
@@ -68,6 +70,10 @@ ul {
     grid-template-rows: auto 1fr 1fr 1fr;
     grid-template-areas: " p h " " i . " " . . " " . . " " . . " " . . " " . . ";
   }
+  li {
+    padding: 2vmin;
+  }
+
 }
 
 @media (min-width: 700px) and (max-width:1024px) {
@@ -88,5 +94,13 @@ ul {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto 1fr 1fr 1fr;
     grid-template-areas: " i i h h " " . . . . " " . . . . " " . . . p ";
+    height: 100vh;
+    max-height: 100vh;
+    min-height: auto;
   }
+}
+
+:target {
+  z-index: 10;
+  border: 0.25em solid white;
 }
