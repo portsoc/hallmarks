@@ -1,18 +1,17 @@
-window.addEventListener("load", () => {
-  'use strict';
-  let rot = 0;
-  let step = 30;
-  let lis = document.querySelectorAll(".hallmark");
+let rot = 0;
+let step = 30;
+let revealOffset = 120;
+let hallmarks = document.getElementById("x");
+let lis = document.querySelectorAll(".hallmarks>li");
 
+for (let [index, li] of lis.entries()) {
+  li.style.filter = `hue-rotate(${rot}deg)`;
+  li.style.animationDelay = `${index * revealOffset}ms`;
+  li.addEventListener("click", function(e) {
+      location.href = "#"+e.target.id;
+  });
+  rot += step;
+}
 
-  for (let li of lis) {
-    li.style = `filter: hue-rotate(${rot}deg)`;
-    li.addEventListener("click", function(e) {
-        location.href = "#"+e.target.id;
-//        history.pushState({}, e.target.textContent, "#"+e.target.id);
-    });
-    rot += step;
-  }
-
-  window.x.setAttribute("style", `filter: brightness(100%)`);
-});
+hallmarks.classList.add("is-ready");
+hallmarks.style.filter = "brightness(100%)";
