@@ -12,7 +12,7 @@ body {
 html,
 body {
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 img {
@@ -95,11 +95,11 @@ img {
 
 #hallmark {
   grid-area: h;
-  color: rgba(255, 255, 255, 0.75)
 }
 
 #hallmark, #port, #intro {
   background: #621360;
+  color: contrast-color(#621360);
 }
 
 /* Default layout for low res */
@@ -110,7 +110,6 @@ img {
   grid-template-columns: 1fr;
   grid-template-rows: repeat(10, auto);
   min-height: 100vh;
-  overflow: hidden;
 }
 
 /* Wider screens go to 2 columns */
@@ -150,6 +149,7 @@ img {
     grid-template-areas: " i i h h " " . . . . " " . . . . " " . . . p ";
     height: 100vh;
     min-height: auto;
+    overflow: hidden;
   }
 }
 
