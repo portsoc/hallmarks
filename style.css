@@ -1,13 +1,11 @@
 * {
   margin: 0;
   padding: 0;
-  transition: filter 2s ease-in-out;
 }
 
 body {
   font-size: 150%;
-  font-family: 'Helvetica Neue', 'sans serif';
-  box-sizing: border-box;
+  font-family: 'Helvetica Neue', sans-serif;
   background: black;
 }
 
@@ -22,24 +20,33 @@ img {
   width: auto;
 }
 
-li {
-  list-style: none;
+.hallmarks>a {
   color: #fff;
-  padding: 5vmin;
   border: 0.25em solid transparent;
-}
-
-.hallmarks>li {
+  text-decoration: none;
+  display: block;
+  padding: 5vmin;
   opacity: 0;
   transform: scale(0.01);
   animation: hallmark-reveal 1400ms ease-in-out forwards;
-  animation-play-state: paused;
   overflow: hidden;
+  filter: hue-rotate(calc(var(--i, 0) * 30deg));
+  animation-delay: calc(var(--i, 0) * 120ms);
 }
 
-.hallmarks.is-ready>li {
-  animation-play-state: running;
-}
+.hallmarks>a:nth-child(1)  { --i:  0; }
+.hallmarks>a:nth-child(2)  { --i:  1; }
+.hallmarks>a:nth-child(3)  { --i:  2; }
+.hallmarks>a:nth-child(4)  { --i:  3; }
+.hallmarks>a:nth-child(5)  { --i:  4; }
+.hallmarks>a:nth-child(6)  { --i:  5; }
+.hallmarks>a:nth-child(7)  { --i:  6; }
+.hallmarks>a:nth-child(8)  { --i:  7; }
+.hallmarks>a:nth-child(9)  { --i:  8; }
+.hallmarks>a:nth-child(10) { --i:  9; }
+.hallmarks>a:nth-child(11) { --i: 10; }
+.hallmarks>a:nth-child(12) { --i: 11; }
+.hallmarks>a:nth-child(13) { --i: 12; }
 
 @keyframes hallmark-reveal {
   0% {
@@ -61,12 +68,17 @@ li {
   }
 }
 
-.hallmarks>li:nth-child(even) {
+@keyframes hallmarks-brighten {
+  from { filter: brightness(0%); }
+  to   { filter: brightness(100%); }
+}
+
+.hallmarks>a:nth-child(even) {
   background-color: #621360;
   color: contrast-color(#621360);
 }
 
-.hallmarks>li:nth-child(odd) {
+.hallmarks>a:nth-child(odd) {
   background-color: #00a0ff;
   color: contrast-color(#00a0ff);
 }
@@ -90,17 +102,14 @@ li {
   background: #621360;
 }
 
-/* Default UL for low res */
-ul {
+/* Default layout for low res */
+.hallmarks {
   display: grid;
-  filter: brightness(0%);
+  animation: hallmarks-brighten 2s ease-in-out forwards;
   grid-template-areas: " h " " i " " . " " . " " . " " . " " . " " . " " . " " . " " . " " . " " . " " p ";
   grid-template-columns: 1fr;
   grid-template-rows: repeat(10, auto);
-  height: auto;
-  line-height: inherit;
   min-height: 100vh;
-  width: 100%;
   overflow: hidden;
 }
 
@@ -109,24 +118,23 @@ ul {
   img {
     width: 100%;
   }
-  ul {
+  .hallmarks {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr 1fr 1fr;
     grid-template-areas: " p h " " i . " " . . " " . . " " . . " " . . " " . . ";
   }
-  li {
+  .hallmarks>a {
     padding: 2vmin;
   }
-
 }
 
 @media (min-width: 700px) and (max-width:1024px) {
-  .hallmarks>li:nth-child(4n-1) {
+  .hallmarks>a:nth-child(4n-1) {
     background-color: #621360;
     color: contrast-color(#621360);
   }
 
-  .hallmarks>li:nth-child(4n-2) {
+  .hallmarks>a:nth-child(4n-2) {
     background-color: #00a0ff;
     color: contrast-color(#00a0ff);
   }
@@ -134,19 +142,18 @@ ul {
 
 /* Beyond 1024 there's room for a 4 column grid */
 @media (min-width: 1024px) {
-  ul {
+  .hallmarks {
     font-size: 2.2vmin;
     line-height: 3vmin;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto 1fr 1fr 1fr;
     grid-template-areas: " i i h h " " . . . . " " . . . . " " . . . p ";
     height: 100vh;
-    max-height: 100vh;
     min-height: auto;
   }
 }
 
-:target {
+.hallmarks>a:target {
   z-index: 10;
   border: 0.25em solid white;
 }
